@@ -1,0 +1,25 @@
+LAOAPI/LAOAPI-core/target/
+LAOAPI/LAOAPI-mybatis/target/
+LAOAPI/LAOAPI-page/target/
+LAOAPI/LAOAPI-redis/target/
+LAOAPI/LAOAPI-SDK/target/
+LAOAPI/LAOAPI-service/target/
+LAOAPI/LAOAPI-SpringMVC/target/
+*.class
+*.settings
+*.classpath
+*.project
+*.classpath
+*.jar/LAOAPI/
+/LAOAPI/LAOAPI-SpringMVC/.externalToolBuilders/org.eclipse.wst.common.project.facet.core.builder.launch
+/LAOAPI/LAOAPI-SpringMVC/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator (4).launch
+/LAOAPI/LAOAPI-SpringMVC/.externalToolBuilders/org.eclipse.wst.validation.validationbuilder (2).launch
+/LAOAPI/LAOAPI-SpringMVC/sdklog/sdkclient_CommunicateLog_info
+/LAOAPI/LAOAPI-SpringMVC/sdklog/sdkclient_EMAYSDK_info
+.idea
+*.iml
+/out/
+/sdklog/
+/target/
+*.log
+*.zip
