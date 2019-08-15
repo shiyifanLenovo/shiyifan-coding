@@ -12,8 +12,7 @@
     <!--dubbo这个服务所要暴露的服务地址所对应的注册中心-->
     <dubbo:registry protocol="zookeeper"
                     address="${dubbo.zk.servers}"
-                    group="${dubbo.zk.group}"
-                    file="${dubbo.cache.dir}/dubbo-order.cache"/>
+                    group="${dubbo.zk.group}"/>
 
     <!--当前服务发布所依赖的协议；webserovice、Thrift、Hessain、http-->
     <dubbo:protocol

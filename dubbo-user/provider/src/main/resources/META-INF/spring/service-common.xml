@@ -8,7 +8,8 @@
 		                http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:property-placeholder location="classpath:dbconfig.properties"  ignore-unresolvable="true"/>
-	<context:component-scan base-package="com.shiyifan.service" />
+	<context:property-placeholder location="classpath:application.properties"  ignore-unresolvable="true"/>
+	<context:component-scan base-package="com.shiyifan.services" />
 
 	<!-- 配置数据源-->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
