@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>api</artifactId>
+    <artifactId>user-api</artifactId>
 
-    <name>api</name>
+    <name>user-api</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

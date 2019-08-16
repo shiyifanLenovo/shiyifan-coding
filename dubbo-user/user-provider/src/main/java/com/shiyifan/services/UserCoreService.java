@@ -21,6 +21,9 @@ public class UserCoreService implements IUserCoreService {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private JwtTokenService jwtTokenService;
+
 	@Override
 	public UserLoginResponse login(UserLoginRequest userLoginRequest) {
 		LOGGER.info("begin login request "+userLoginRequest.toString());
