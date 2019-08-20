@@ -6,11 +6,13 @@
     <artifactId>parent-web</artifactId>
     <groupId>com.shiyifan.parent</groupId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath/>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.shiyifan.protal</groupId>
   <artifactId>pinyg-protal</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
   <name>pinyg-protal</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
@@ -51,10 +53,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-web</artifactId>
-    </dependency>
+
 
 
     <dependency>
@@ -63,7 +62,11 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
-
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.39.Final</version>
+    </dependency>
 
     <!--dubbo-->
     <dependency>
@@ -80,33 +83,11 @@
       <artifactId>user-api</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
-
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-    </dependency>
-    <!-- velocity begin -->
-    <dependency>
-      <groupId>org.apache.velocity</groupId>
-      <artifactId>velocity-tools</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.velocity</groupId>
-      <artifactId>velocity</artifactId>
-    </dependency>
-    <!-- velocity end -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>

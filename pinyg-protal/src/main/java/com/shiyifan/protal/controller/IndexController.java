@@ -17,7 +17,7 @@ public class IndexController extends BaseController {
 
 
 	@Autowired
-	IUserCoreService coreService;
+	IUserCoreService userCoreServices;
 
 
 	@RequestMapping("/index")
@@ -27,14 +27,15 @@ public class IndexController extends BaseController {
 
 	@RequestMapping("/login")
 	public String login(){
+		System.out.println("denglu");
 		return "login";
 	}
-	@PostMapping("/login")
+	@RequestMapping("/doLogin")
 	public UserLoginResponse doLogin(String textUser, String userPwd, HttpResponse response){
 		UserLoginRequest userLoginRequest = new UserLoginRequest();
 		userLoginRequest.setPassword(userPwd);
 		userLoginRequest.setUsername(textUser);
-		UserLoginResponse login = coreService.login(userLoginRequest);
+		UserLoginResponse login = userCoreServices.login(userLoginRequest);
 		if("000000".equals(login.getCode())){
 			response.setHeader("Set-Cookie","access-token="+login.getToken()+":Path=/:HttpOnly");
 		}

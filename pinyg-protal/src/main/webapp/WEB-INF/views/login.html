@@ -1,125 +1,265 @@
-#override("title")
-品优购商城 - 登录
-#end
-#override("css")
-<link type="text/css" href="#springUrl('resources/css/login/base.css')" rel="stylesheet" />
-<link href="#springUrl('resources/css/login/style.css')" rel="stylesheet" />
-#end
-#override("body")
-<body style="background: #f6f6f6">
-<div class="wrapper" id="login_head" style="display:">
-    <div class="log_head">
-        <h1 class="log_logo left"><a href="javascript:;"><span>欢迎登录</span></a></h1>
-    </div>
-</div>
-<div class="login_wrap" style="width:; background:#fff url(#springUrl('/resources/images/login/20161209115754_5628.jpg')) no-repeat center top; padding:40px 0;">
-    <div class="wrapper" id="login_body" style="width:;">
-        <div class="log_ad" style="display:"><a href="javascript:;"></a></div>
-        <div class="login_border" style="padding:8px;">
-            <div class="login" style="display: block;">
-                <div style="position:absolute; right:30px; top:14px;">
-                    <a href="#springUrl('/register.shtml')">账号注册
-                        <em style="width:16px; height:16px; background:#999; float:right; color:#fff; border-radius:100%; text-align:center; line-height:16px; margin:1px 0 0 5px; font-family:'宋体'; font-weight:bold;">&gt;</em>
-                    </a>
-                </div>
-                <ul class="login-tab">
-                    <li class="login-on">普通登录</li>
-                    <li>手机登录</li>
-                </ul>
-                <div class="login-body">
-                    <div class="login-style" style="display: block;">
-                        <dl><dd><input name="txtUser" type="text" id="txtUser" placeholder="用户名/邮箱/手机号" /></dd></dl>
-                        <dl>
-                            <dd><input type="password" id="Userpwd" onKeyDown="enterHandler(event)" placeholder="请输入您的密码" /></dd>
-                        </dl>
-                        <!-- <dl id="logincode" style="display: none;">
-                        <dd><input type="text" id="txtCode" name="txtCode" style="width: 133px; margin-right: 10px;" placeholder="验证码" /><img id="vCodeImg" src="" width="90" height="34" title="点击换一个" style="vertical-align: middle; margin-top: -4px;" onclick="this.src='/ImgCode.aspx?t='+Math.random()*100" /></dd>
-                        </dl> -->
-                        <div class="psword" style="margin-top:15px;"><a href="javascript:void(0);" onClick="zhaohui(this)" tabindex="-1" class="right" target="_blank">忘记密码?</a></div>
-                        <div class="remember">
-                            <input type="checkbox" id="issave" checked /><label for="issave">下次自动登录</label>
-                        </div>
-                        <div class="tishi"></div>
-                        <button onClick="cliLogin()" id="logbtn" style="outline:none">登 录</button>
-                    </div>
-                    <div class="login-style">
-                        <dl><dd><input name="phone" type="text" id="phone" placeholder="您的手机号码" /></dd></dl>
-                        <!-- <dl id="yz-code" style="display: none;">
-                        <dd><input type="text" id="txtCode2" name="txtCode2" style="width: 133px; margin-right: 10px;" placeholder="验证码" /><img id="Img1" src="" width="90" height="34" title="点击换一个" style="vertical-align: middle; margin-top: -4px;" onclick="this.src='/ImgCode.aspx?t='+Math.random()*100" /></dd>
-                        </dl> -->
-                        <dl>
-                            <dd><input type="text" id="dynamicPWD" onKeyDown="enterHandler(event)" style="width: 133px;" placeholder="短信验证码" /><input type="button" id="btn" class="btn_mfyzm" value="获取动态密码" onClick="Sendpwd(this)" /></dd>
-                        </dl>
-                        <div class="remember">
-                            <input type="checkbox" id="issave1" checked /><label for="issave1">下次自动登录</label>
-                        </div>
-                        <div class="tishi"></div>
-                        <button type="button" id="dynamicLogon" style="outline:none">登 录</button>
-                    </div>
-                </div>
-                <div class="hezuo">
-                    <h3>使用合作网站的账号登录：</h3>
-                    <p>
-                        <a href="javascript:;" onClick="showWxlog()"><i class="wx"></i>微信</a>
-                        <a href="javascript:;" onClick="qqLogin()"><i class="qq"></i>QQ号</a>
-                    </p>
-                </div>
-                <div class="qiehuan"></div>
-                <div id="zhishi" style="position:absolute; right:-185px; bottom:0; cursor:pointer;"><img src="#springUrl('resources/images/login/zhishi2.png')" /></div>
-            </div>
-            <div class="login" style="display: none;">
-                <i class="qiehuan" style="background-position:left bottom;"></i>
-                <div class="app_login">
-                    <h1><i>-</i>登录失败，请刷新二维码后重试！</h1>
-                    <h2>使用九机APP&nbsp;&nbsp;扫码安全登录</h2>
-                </div>
-                <div class="app_code"><img id="appLoginCode" src="http://pan.baidu.com/share/qrcode?w=155&h=155&url=http://www.17sucai.com" /></div>
-                <div class="shuaxin">
-                    <span>刷新二维码</span>
-                    <p><a href="javascript:;" target="_blank">查看使用帮助</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-    </div>
-</div>
-<div class="wxlogma">
-    <a class="close" onClick="closewx()"></a>
-    <h3>微信扫一扫二维码登录</h3>
-    <iframe width="200" height="200" scrolling="no" frameborder="0" id="weixinCode"></iframe>
-</div>
-<div id="bindweixin" style="display:none;">
-    <div class="bindWeixin">
-        <p class="login-success">登录成功！</p>
-        <div class="login-tips">为了您的帐号安全，建议绑定微信号</div>
-        <img id="twocodetemp" src="#" />
-    </div>
-</div>
-<div class="bottom">
-    <div class="wrapper">
-        <div class="foot_nav">
-            <a href="http://www.17sucai.com" rel="nofollow">关于我们</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">联系我们</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">商家入驻</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">营销中心</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">手机品优购</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">友情链接</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">销售联盟</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">品优购社区</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">品优购公益</a><i>|</i>
-            <a href="http://www.17sucai.com" rel="nofollow">English Site</a>
-        </div>
-        <div class="copy">
-            <p>各门店营业时间：周一至周日 09:00-21:30 &nbsp;&nbsp;&nbsp;&nbsp; 全国服务热线：000-000-00000 &nbsp;&nbsp;0000-00000000 &nbsp;&nbsp;&nbsp;&nbsp; 工作时间：周一至周日 09:00-21:30</p>
-            <p>网站ICP备案号：<a rel="nofollow" href="javascript:;" target="_blank">京ICP备xxxxx号</a> &nbsp;&nbsp;&nbsp;&nbsp; 电信业务经营许可证：滇B2-xxxx号 &nbsp;&nbsp;&nbsp;&nbsp; </p>
-            <p>Copyright © 2006 - 2017 品优购JD.com 版权所有</p>
-        </div>
-    </div>
-</div>
-#end
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>login</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap {
+            height: 719px;
+            width: 100;
+            background-image: url(4.jpg);
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: relative;
+        }
+        #head {
+            height: 120px;
+            width: 100;
+            background-color: #66CCCC;
+            text-align: center;
+            position: relative;
+        }
+        #foot {
+            width: 100;
+            height: 126px;
+            background-color: #CC9933;
+            position: relative;
+        }
+        #wrap .logGet {
+            height: 408px;
+            width: 368px;
+            position: absolute;
+            background-color: #FFFFFF;
+            top: 20%;
+            right: 15%;
+        }
+        .logC a button {
+            width: 100%;
+            height: 45px;
+            background-color: #ee7700;
+            border: none;
+            color: white;
+            font-size: 18px;
+        }
+        .logGet .logD.logDtip .p1 {
+            display: inline-block;
+            font-size: 28px;
+            margin-top: 30px;
+            width: 86%;
+        }
+        #wrap .logGet .logD.logDtip {
+            width: 86%;
+            border-bottom: 1px solid #ee7700;
+            margin-bottom: 60px;
+            margin-top: 0px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .logGet .lgD img {
+            position: absolute;
+            top: 12px;
+            left: 8px;
+        }
+        .logGet .lgD input {
+            width: 100%;
+            height: 42px;
+            text-indent: 2.5rem;
+        }
+        #wrap .logGet .lgD {
+            width: 86%;
+            position: relative;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        #wrap .logGet .logC {
+            width: 86%;
+            margin-top: 0px;
+            margin-right: auto;
+            margin-bottom: 0px;
+            margin-left: auto;
+        }
 
-#override("js")
-<script type="text/javascript" src="#springUrl('/resources/js/style.js')"></script>
-#end
 
-#extends("/common/base.html")
+        .title {
+            font-family: "宋体";
+            color: #FFFFFF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  /* 使用css3的transform来实现 */
+            font-size: 36px;
+            height: 40px;
+            width: 30%;
+        }
+
+        .copyright {
+            font-family: "宋体";
+            color: #FFFFFF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);  /* 使用css3的transform来实现 */
+            height: 60px;
+            width: 40%;
+            text-align:center;
+        }
+
+
+        #foot .copyright .img {
+            width: 100%;
+            height: 24px;
+            position: relative;
+        }
+        .copyright .img .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-left: 22px;
+            vertical-align: middle;
+            background-image: url(%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6.png);
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .copyright .img .icon1 {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-left: 22px;
+            vertical-align: middle;
+            background-image: url(%E5%9C%B0%E5%9D%80.png);
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .copyright .img .icon2 {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-left: 22px;
+            vertical-align: middle;
+            background-image: url(%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F.png);
+            background-repeat: no-repeat;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        #foot .copyright p {
+            height: 24px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header" id="head">
+    <div class="title">登陆页面</div>
+</div>
+
+<div class="wrap" id="wrap">
+    <div class="logGet">
+        <!-- 头部提示信息 -->
+        <div class="logD logDtip">
+            <p class="p1">登录</p>
+        </div>
+        <!-- 输入框 -->
+        <div class="lgD">
+            <img src="img/logName.png" width="20" height="20" alt=""/>
+            <input name="txtUser" type="text" id="txtUser"
+                   placeholder="输入用户名" />
+        </div>
+        <div class="lgD">
+            <img src="img/logPwd.png" width="20" height="20" alt=""/>
+            <input type="password" id="Userpwd" onKeyDown="enterHandler(event)"
+                   placeholder="输入用户密码" />
+        </div>
+        <div class="logC">
+            <a href="index.html" target="_self"><button onClick="cliLogin()" id="logbtn">登 录</button></a>
+        </div>
+    </div>
+</div>
+<script>
+    function cliLogin() {
+
+        var txtUser = $.trim($("#txtUser").val());
+        var txtPwd = $("#Userpwd").val();
+        var txtCode = $.trim($('#txtCode').val());
+        if ($.trim(txtUser) == "") {
+            Tip('请输入账号！');
+            $("#txtUser").focus();
+            return;
+        }
+        if ($.trim(txtPwd) == "") {
+            Tip('请输入密码！');
+            $("#Userpwd").focus();
+            return;
+        }
+        if ($('#logincode').attr('iscode') == "1" && txtCode == "") {
+            Tip('请输入验证码！');
+            $("#txtCode").focus();
+            return false;
+        }
+        $.ajax({
+            uri:"localhost:8081/doLogin",
+            type: "POST",
+            data:{textUser:txtUser,UserPwd:txtPwd},
+            success:function (data) {
+                if(data.code=="000000"){
+                    location.href="/index.html";
+                }else {
+                    alert(data.msg);
+                }
+            }
+
+        });
+        return false;
+    }
+
+    function Sendpwd(sender) {
+        var code = $("#txtCode2").val();
+        var phone = $.trim($("#phone").val());
+        if ($.trim(phone) == "") {
+            Tip('请填写手机号码！');
+            $("#phone").focus();
+            return;
+        }
+        if ($("#yz-code").is(":visible") && $.trim(code) == "") {
+            Tip('请填写验证码！');
+            $("#txtCode2").focus();
+            return;
+        }
+        return;
+    }
+    $("#dynamicLogon").click(function() {
+        var pwd = $.trim($("#dynamicPWD").val());
+        var phone = $.trim($("#phone").val());
+        var code = $("#txtCode2").val();
+        if ($.trim(phone) == "") {
+            Tip('请填写手机号码！');
+            $("#phone").focus();
+            return;
+        }
+        if ($("#yz-code").is(":visible") && $.trim(code) == "") {
+            Tip('请填写验证码！');
+            $("#txtCode2").focus();
+            return;
+        }
+        if ($.trim(pwd) == "") {
+            Tip('动态密码未填写！');
+            $("#dynamicPWD").focus();
+            return;
+        }
+        return;
+    });
+    function Tip(msg) {
+        $(".tishi").show().text(msg);
+    }
+</script>
+</body>
+</html>
