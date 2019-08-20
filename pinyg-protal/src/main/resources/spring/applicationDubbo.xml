@@ -12,10 +12,8 @@
        default-autowire="byName">
 
     <dubbo:application name="pinyg-protal"  />
-    <dubbo:registry protocol="zookeeper" file="d:/dubbo.cache" group="dubbo-dev"
+    <dubbo:registry protocol="zookeeper" group="dubbo-dev"
                     address="127.0.0.1:2181"/>
-
-    <!--<import resource="classpath*:META-INF/client/order-customer.xml"/>-->
-    <import resource="classpath*:META-INF/client/user-reference.xml"/>
+    <import resource="classpath*:META-INF/consumer/user-reference.xml"/>
 
 </beans>
