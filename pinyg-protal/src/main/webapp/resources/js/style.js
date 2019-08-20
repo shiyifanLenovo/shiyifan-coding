@@ -33,6 +33,21 @@ function cliLogin() {
 		$("#txtCode").focus();
 		return false;
 	}
+	$.ajax({
+		uri:"/login.shtml",
+		type: "POST",
+		data:{textUser:txtUser,UserPwd:$("#Userpwd").val()},
+		success:function (data) {
+			if(data.code=="000000"){
+				location.href="/index.shtml";
+			}else {
+				alert(data.msg);
+			}
+        }
+
+	});
+
+
 	return false;
 }
 

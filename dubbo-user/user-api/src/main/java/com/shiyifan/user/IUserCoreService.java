@@ -1,9 +1,6 @@
 package com.shiyifan.user;
 
-import com.shiyifan.user.dto.UserLoginRequest;
-import com.shiyifan.user.dto.UserLoginResponse;
-import com.shiyifan.user.dto.UserRegisterRequest;
-import com.shiyifan.user.dto.UserRegisterResponse;
+import com.shiyifan.user.dto.*;
 
 public interface IUserCoreService {
 
@@ -21,4 +18,13 @@ public interface IUserCoreService {
 	 * @return
 	 */
 	UserRegisterResponse register(UserRegisterRequest userRegisterRequest);
+
+
+	/**
+	 * 授权
+	 * @param checkAuthRequest
+	 * @return
+	 */
+	CheckAuthResponse checkAuth(CheckAuthRequest checkAuthRequest);
+
 }
