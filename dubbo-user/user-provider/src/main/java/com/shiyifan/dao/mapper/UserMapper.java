@@ -1,7 +1,7 @@
-package com.shiyifan.dao.mapper;
+package com.pinyg.dao.mapper;
 
 
-import com.shiyifan.dao.po.User;
+import com.pinyg.dao.po.User;
 
 public interface UserMapper {
 

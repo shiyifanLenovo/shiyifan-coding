@@ -1,4 +1,4 @@
-package com.shiyifan.dao.passwd;
+package com.pinyg.dao.passwd;
 
 import com.alibaba.druid.util.DruidPasswordCallback;
 

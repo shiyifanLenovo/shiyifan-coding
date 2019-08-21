@@ -8,10 +8,10 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd" default-autowire="byName">
 
     <!--服务发布的配置，需要暴露的服务接口-->
-    <dubbo:service interface="com.shiyifan.user.IUserCoreService"
+    <dubbo:service interface="com.pinyg.user.IUserCoreService"
                    ref="userCoreService" timeout="3000"/>
 
-    <dubbo:service interface="com.shiyifan.user.IUserQueryService"
+    <dubbo:service interface="com.pinyg.user.IUserQueryService"
                    ref="userQueryService" timeout="3000"/>
 
 </beans>

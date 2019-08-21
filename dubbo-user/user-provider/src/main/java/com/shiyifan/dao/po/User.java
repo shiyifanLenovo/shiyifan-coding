@@ -1,4 +1,4 @@
-package com.shiyifan.dao.po;
+package com.pinyg.dao.po;
 
 import java.util.Date;
 

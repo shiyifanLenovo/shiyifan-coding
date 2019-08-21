@@ -1,7 +1,7 @@
-package com.shiyifan.user;
+package com.pinyg.user;
 
-import com.shiyifan.user.dto.UserQueryRequest;
-import com.shiyifan.user.dto.UserQueryResponse;
+import com.pinyg.user.dto.UserQueryRequest;
+import com.pinyg.user.dto.UserQueryResponse;
 
 public interface IUserQueryService {
 

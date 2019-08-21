@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shiyifan.dao.mapper.UserMapper">
+<mapper namespace="com.pinyg.dao.mapper.UserMapper">
 
     <sql id="Base_Column_List" >
         id, username,password,realname,avatar,mobile,sex,status,create_time
     </sql>
 
     <select id="getUserByUserName"
-            resultType="com.shiyifan.dao.po.User"
+            resultType="com.pinyg.dao.po.User"
             parameterType="java.lang.String">
         select <include refid="Base_Column_List"/> from user where username=#{username}
     </select>
 
     <select id="getUserByUid"
-            resultType="com.shiyifan.dao.po.User"
+            resultType="com.pinyg.dao.po.User"
             parameterType="java.lang.Integer">
         select <include refid="Base_Column_List"/> from user where id=#{uid}
     </select>
 
-    <insert id="insertSelective" parameterType="com.shiyifan.dao.po.User" keyColumn="id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.pinyg.dao.po.User" keyColumn="id" useGeneratedKeys="true">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="username != null">

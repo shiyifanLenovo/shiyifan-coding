@@ -1,7 +1,7 @@
-package com.shiyifan.exception;
+package com.pinyg.exception;
 
 
-import com.shiyifan.user.constants.ResponseCodeEnum;
+import com.pinyg.user.constants.ResponseCodeEnum;
 
 /**
  * Create by qingyin@wacai.com

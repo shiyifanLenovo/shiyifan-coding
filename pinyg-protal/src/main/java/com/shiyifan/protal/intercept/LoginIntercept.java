@@ -1,11 +1,11 @@
-package com.shiyifan.protal.intercept;
+package com.pinyg.protal.intercept;
 
 import com.alibaba.fastjson.JSONObject;
-import com.shiyifan.protal.controller.BaseController;
-import com.shiyifan.protal.support.Anonymous;
-import com.shiyifan.user.IUserCoreService;
-import com.shiyifan.user.dto.CheckAuthRequest;
-import com.shiyifan.user.dto.CheckAuthResponse;
+import com.pinyg.protal.controller.BaseController;
+import com.pinyg.protal.support.Anonymous;
+import com.pinyg.user.IUserCoreService;
+import com.pinyg.user.dto.CheckAuthRequest;
+import com.pinyg.user.dto.CheckAuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;

@@ -1,4 +1,4 @@
-package com.shiyifan.protal;
+package com.pinyg.protal;
 
 import static org.junit.Assert.assertTrue;
 

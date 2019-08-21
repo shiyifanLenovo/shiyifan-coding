@@ -1,4 +1,4 @@
-package com.shiyifan.protal.support;
+package com.pinyg.protal.support;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

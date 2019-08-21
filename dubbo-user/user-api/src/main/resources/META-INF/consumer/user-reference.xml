@@ -11,8 +11,8 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd" default-autowire="byName">
     <context:annotation-config/>
 
-    <dubbo:reference id="userCoreServices" interface="com.shiyifan.user.IUserCoreService" check="false"/>
+    <dubbo:reference id="userCoreServices" interface="com.pinyg.user.IUserCoreService" check="false"/>
 
-    <dubbo:reference id="userQueryService" interface="com.shiyifan.user.IUserQueryService"/>
+    <dubbo:reference id="userQueryService" interface="com.pinyg.user.IUserQueryService"/>
 
 </beans>

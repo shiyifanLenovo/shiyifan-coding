@@ -1,4 +1,4 @@
-package com.shiyifan.user.constants;
+package com.pinyg.user.constants;
 
 /**
  * @author shiyf

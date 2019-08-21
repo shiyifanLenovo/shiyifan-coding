@@ -1,14 +1,14 @@
-package com.shiyifan.services;
+package com.pinyg.services;
 
-import com.shiyifan.dao.mapper.UserMapper;
-import com.shiyifan.dao.po.User;
-import com.shiyifan.exception.ExceptionUtil;
-import com.shiyifan.exception.ServiceException;
-import com.shiyifan.exception.ValidateException;
-import com.shiyifan.user.IUserCoreService;
-import com.shiyifan.user.constants.ResponseCodeEnum;
-import com.shiyifan.user.dto.*;
-import com.shiyifan.utils.JwtInfo;
+import com.pinyg.dao.mapper.UserMapper;
+import com.pinyg.dao.po.User;
+import com.pinyg.exception.ExceptionUtil;
+import com.pinyg.exception.ServiceException;
+import com.pinyg.exception.ValidateException;
+import com.pinyg.user.IUserCoreService;
+import com.pinyg.user.constants.ResponseCodeEnum;
+import com.pinyg.user.dto.*;
+import com.pinyg.utils.JwtInfo;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import org.joda.time.DateTime;

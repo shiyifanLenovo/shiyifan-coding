@@ -1,9 +1,9 @@
-package com.shiyifan.services;
-import com.shiyifan.dao.mapper.UserMapper;
-import com.shiyifan.dao.po.User;
-import com.shiyifan.user.IUserQueryService;
-import com.shiyifan.user.dto.UserQueryRequest;
-import com.shiyifan.user.dto.UserQueryResponse;
+package com.pinyg.services;
+import com.pinyg.dao.mapper.UserMapper;
+import com.pinyg.dao.po.User;
+import com.pinyg.user.IUserQueryService;
+import com.pinyg.user.dto.UserQueryRequest;
+import com.pinyg.user.dto.UserQueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

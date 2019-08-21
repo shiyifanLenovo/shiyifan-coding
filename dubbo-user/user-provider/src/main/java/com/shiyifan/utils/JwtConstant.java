@@ -1,4 +1,4 @@
-package com.shiyifan.utils;
+package com.pinyg.utils;
 
 public class JwtConstant {
 

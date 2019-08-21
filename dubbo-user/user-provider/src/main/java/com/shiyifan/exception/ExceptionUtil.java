@@ -1,8 +1,8 @@
 
-package com.shiyifan.exception;
+package com.pinyg.exception;
 
 
-import com.shiyifan.user.constants.ResponseCodeEnum;
+import com.pinyg.user.constants.ResponseCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

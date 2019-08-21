@@ -1,6 +1,6 @@
-package com.shiyifan.user;
+package com.pinyg.user;
 
-import com.shiyifan.user.dto.*;
+import com.pinyg.user.dto.*;
 
 public interface IUserCoreService {
 

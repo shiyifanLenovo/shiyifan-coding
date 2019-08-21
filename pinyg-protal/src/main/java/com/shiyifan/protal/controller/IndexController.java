@@ -1,10 +1,10 @@
-package com.shiyifan.protal.controller;
+package com.pinyg.protal.controller;
 
-import com.shiyifan.protal.support.ResponseData;
-import com.shiyifan.user.IUserCoreService;
-import com.shiyifan.user.IUserQueryService;
-import com.shiyifan.user.dto.UserLoginRequest;
-import com.shiyifan.user.dto.UserLoginResponse;
+import com.pinyg.protal.support.ResponseData;
+import com.pinyg.user.IUserCoreService;
+import com.pinyg.user.IUserQueryService;
+import com.pinyg.user.dto.UserLoginRequest;
+import com.pinyg.user.dto.UserLoginResponse;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -13,7 +13,6 @@
     <dubbo:registry protocol="zookeeper"
                     address="${dubbo.zk.servers}"
                     group="${dubbo.zk.group}"/>
-
     <!--当前服务发布所依赖的协议；webserovice、Thrift、Hessain、http-->
     <dubbo:protocol
                     name="dubbo"

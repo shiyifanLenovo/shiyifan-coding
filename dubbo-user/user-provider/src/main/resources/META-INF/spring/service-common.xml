@@ -9,7 +9,7 @@
 
 	<context:property-placeholder location="classpath:dbconfig.properties"  ignore-unresolvable="true"/>
 	<context:property-placeholder location="classpath:application.properties"  ignore-unresolvable="true"/>
-	<context:component-scan base-package="com.shiyifan.services" />
+	<context:component-scan base-package="com.pinyg.services" />
 
 	<!-- 配置数据源-->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -49,17 +49,17 @@
 
          <property name="passwordCallback" ref="dbPasswordCallback"/>-->
 	</bean>
-	<bean name="dbPasswordCallback" class="com.shiyifan.dao.passwd.DbPasswordCallback"></bean>
+	<bean name="dbPasswordCallback" class="com.pinyg.dao.passwd.DbPasswordCallback"></bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
 		<!-- 显式指定Mapper文件位置 -->
 		<property name="mapperLocations" value="classpath*:com/shiyifan/mapper/**/*Mapper.xml"/>
-		<property name="typeAliasesPackage" value="com.shiyifan.dao.po"/>
+		<property name="typeAliasesPackage" value="com.pinyg.dao.po"/>
 	</bean>
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.shiyifan.dao.mapper"/>
+		<property name="basePackage" value="com.pinyg.dao.mapper"/>
 	</bean>
 	<!-- (事务管理)transaction manager -->
 	<bean id="transactionManager"

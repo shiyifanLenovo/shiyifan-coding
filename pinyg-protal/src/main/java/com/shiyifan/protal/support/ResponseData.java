@@ -1,4 +1,4 @@
-package com.shiyifan.protal.support;
+package com.pinyg.protal.support;
 
 /**
  * Created by Administrator on 2016/5/29.

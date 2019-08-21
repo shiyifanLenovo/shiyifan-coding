@@ -1,6 +1,6 @@
-package com.shiyifan.user.dto;
+package com.pinyg.user.dto;
 
-import com.shiyifan.user.abs.AbstractRequest;
+import com.pinyg.user.abs.AbstractRequest;
 
 import java.io.Serializable;
 

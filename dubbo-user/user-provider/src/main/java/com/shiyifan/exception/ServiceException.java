@@ -1,4 +1,4 @@
-package com.shiyifan.exception;
+package com.pinyg.exception;
 
 
 public class ServiceException extends RuntimeException{

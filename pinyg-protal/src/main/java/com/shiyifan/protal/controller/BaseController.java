@@ -1,4 +1,4 @@
-package com.shiyifan.protal.controller;
+package com.pinyg.protal.controller;
 
 public class BaseController {
 

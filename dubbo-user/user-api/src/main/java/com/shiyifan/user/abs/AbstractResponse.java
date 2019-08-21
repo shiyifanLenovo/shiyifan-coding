@@ -1,4 +1,4 @@
-package com.shiyifan.user.abs;
+package com.pinyg.user.abs;
 
 import java.io.Serializable;
 

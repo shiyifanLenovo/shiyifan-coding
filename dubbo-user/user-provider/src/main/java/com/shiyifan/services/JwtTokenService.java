@@ -1,7 +1,7 @@
-package com.shiyifan.services;
+package com.pinyg.services;
 
-import com.shiyifan.utils.JwtInfo;
-import com.shiyifan.utils.JwtTokenUtil;
+import com.pinyg.utils.JwtInfo;
+import com.pinyg.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

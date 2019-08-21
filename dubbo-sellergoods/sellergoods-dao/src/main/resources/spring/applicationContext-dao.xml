@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 数据库连接池 -->
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath*:properties/*.properties" />
+	<!-- 配置数据源-->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+
+		<!-- 数据库基本信息配置 -->
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<!-- 配置监控统计拦截的filters，监控界面sql统计 -->
+		<property name="filters" value="${jdbc.filters}"/>
+		<!-- 最大并发连接数 -->
+		<property name="maxActive" value="${jdbc.maxActive}"/>
+		<!-- 初始化连接数量 -->
+		<property name="initialSize" value="${jdbc.initialSize}"/>
+		<!-- 配置获取连接等待超时的时间 -->
+		<property name="maxWait" value="${jdbc.maxWait}"/>
+		<!-- 最小空闲连接数 -->
+		<property name="minIdle" value="${jdbc.minIdle}"/>
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+		<property name="validationQuery" value="${jdbc.validationQuery}"/>
+		<property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+		<property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+		<property name="testOnReturn" value="${jdbc.testOnReturn}"/>
+		<property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
+		<!-- 打开 removeAbandoned 功能 -->
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+		<!-- 1800 秒，也就是 30 分钟 -->
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+		<!-- 关闭 abanded 连接时输出错误日志 -->
+		<property name="logAbandoned" value="${jdbc.logAbandoned}"/>
+		<!--
+         <property name="connectionProperties" value="password=${jdbc.password}"/>
+
+         <property name="passwordCallback" ref="dbPasswordCallback"/>-->
+	</bean>
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<!-- 显式指定Mapper文件位置 -->
+		<property name="mapperLocations" value="classpath*:com/pinyg/sellergoods/mapper/*Mapper.xml"/>
+		<property name="typeAliasesPackage" value="com.pinyg.dao.po"/>
+	</bean>
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.pinyg.sellergoods.mapper"/>
+	</bean>
+</beans>
