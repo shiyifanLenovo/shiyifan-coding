@@ -1,5 +1,6 @@
 package com.pinyg.manager.controller;
 
+import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.pojo.TbBrand;
 import com.pinyg.sellergoods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +19,10 @@ public class BrandController {
 	@RequestMapping(value = "/findAll")
 	public List<TbBrand> findAll(){
 		return brandService.findAll();
+	}
+
+	@RequestMapping("/findPage")
+	public PageResult findPage(int page,int rows){
+		return brandService.findPage(page, rows);
 	}
 }
