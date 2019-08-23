@@ -5,6 +5,7 @@ import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.entity.Result;
 import com.pinyg.sellergoods.pojo.TbSeller;
 import com.pinyg.sellergoods.service.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @RequestMapping("/seller")
 public class SellerController {
 
-	@Reference
+	@Autowired
 	private SellerService sellerService;
 	
 	/**

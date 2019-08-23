@@ -14,7 +14,19 @@
     <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" group="dubbo-pinyg"/>
 
     <dubbo:protocol name="dubbo" port="20881" threadpool="cached" threads="200"/>
-
+    <dubbo:annotation package="com.pinyg.sellergoods.service"></dubbo:annotation>
     <dubbo:service interface="com.pinyg.sellergoods.service.BrandService" ref="brandService"
      owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:service interface="com.pinyg.sellergoods.service.GoodsService" ref="goodsService"
+                   owner="pinyg" group="dubbo-pinyg"/>
+    <dubbo:service interface="com.pinyg.sellergoods.service.ItemCatService" ref="itemCatService"
+                   owner="pinyg" group="dubbo-pinyg"/>
+    <dubbo:service interface="com.pinyg.sellergoods.service.SellerService" ref="sellerService"
+                   owner="pinyg" group="dubbo-pinyg"/>
+    <dubbo:service interface="com.pinyg.sellergoods.service.SpecificationService" ref="specificationService"
+                   owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:service interface="com.pinyg.sellergoods.service.TypeTemplateService" ref="typeTemplateService"
+                   owner="pinyg" group="dubbo-pinyg"/>
 </beans>

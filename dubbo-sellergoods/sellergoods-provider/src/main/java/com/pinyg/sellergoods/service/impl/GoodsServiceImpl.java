@@ -4,13 +4,13 @@ import java.util.List;
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyg.sellergoods.mapper.TbGoodsMapper;
 import com.pinyg.sellergoods.pojo.TbGoods;
 import com.pinyg.sellergoods.pojo.TbGoodsExample;
 import com.pinyg.sellergoods.pojo.TbGoodsExample.Criteria;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -18,7 +18,7 @@ import com.pinyg.sellergoods.pojo.TbGoodsExample.Criteria;
  * @author Administrator
  *
  */
-@Service
+@Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
 
 	@Autowired

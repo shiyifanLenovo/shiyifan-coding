@@ -7,6 +7,7 @@ import com.pinyg.sellergoods.entity.Result;
 import com.pinyg.sellergoods.pojo.TbSpecification;
 import com.pinyg.sellergoods.pojogroup.Specification;
 import com.pinyg.sellergoods.service.SpecificationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 @RequestMapping("/specification")
 public class SpecificationController {
 
-	@Reference
+	@Autowired
 	private SpecificationService specificationService;
 	
 	/**

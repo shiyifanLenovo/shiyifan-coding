@@ -4,13 +4,13 @@ import java.util.List;
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.service.ItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyg.sellergoods.mapper.TbItemCatMapper;
 import com.pinyg.sellergoods.pojo.TbItemCat;
 import com.pinyg.sellergoods.pojo.TbItemCatExample;
 import com.pinyg.sellergoods.pojo.TbItemCatExample.Criteria;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -18,7 +18,7 @@ import com.pinyg.sellergoods.pojo.TbItemCatExample.Criteria;
  * @author Administrator
  *
  */
-@Service
+@Service("itemCatService")
 public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired

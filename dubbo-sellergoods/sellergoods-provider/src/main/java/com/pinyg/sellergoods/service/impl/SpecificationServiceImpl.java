@@ -6,7 +6,6 @@ import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.pojogroup.Specification;
 import com.pinyg.sellergoods.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyg.sellergoods.mapper.TbSpecificationMapper;
@@ -16,6 +15,7 @@ import com.pinyg.sellergoods.pojo.TbSpecificationExample;
 import com.pinyg.sellergoods.pojo.TbSpecificationExample.Criteria;
 import com.pinyg.sellergoods.pojo.TbSpecificationOption;
 import com.pinyg.sellergoods.pojo.TbSpecificationOptionExample;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -23,7 +23,7 @@ import com.pinyg.sellergoods.pojo.TbSpecificationOptionExample;
  * @author Administrator
  *
  */
-@Service
+@Service("specificationService")
 public class SpecificationServiceImpl implements SpecificationService {
 
 	@Autowired

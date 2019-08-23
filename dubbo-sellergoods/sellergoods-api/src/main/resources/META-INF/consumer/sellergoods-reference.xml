@@ -10,4 +10,18 @@
     <dubbo:reference interface="com.pinyg.sellergoods.service.BrandService" id="brandService"
       owner="pinyg" group="dubbo-pinyg"/>
 
+    <dubbo:reference interface="com.pinyg.sellergoods.service.GoodsService" id="goodsService"
+                     owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:reference interface="com.pinyg.sellergoods.service.ItemCatService" id="itemCatService"
+                     owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:reference interface="com.pinyg.sellergoods.service.SellerService" id="sellerService"
+                     owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:reference interface="com.pinyg.sellergoods.service.SpecificationService" id="specificationService"
+                     owner="pinyg" group="dubbo-pinyg"/>
+
+    <dubbo:reference interface="com.pinyg.sellergoods.service.TypeTemplateService" id="typeTemplateService"
+                     owner="pinyg" group="dubbo-pinyg"/>
 </beans>

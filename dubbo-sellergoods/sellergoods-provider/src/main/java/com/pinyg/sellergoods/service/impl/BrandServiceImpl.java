@@ -2,8 +2,6 @@ package com.pinyg.sellergoods.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.github.pagehelper.PageSerializable;
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.mapper.TbBrandMapper;
 import com.pinyg.sellergoods.pojo.TbBrand;
@@ -13,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("brandService")
 public class BrandServiceImpl implements BrandService {
@@ -70,5 +69,10 @@ public class BrandServiceImpl implements BrandService {
 		}
 		Page<TbBrand> page=   (Page<TbBrand>) tbBrandMapper.selectByExample(example);
 		 return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public List<Map> selectOptionList() {
+		 return tbBrandMapper.selectOptionList();
 	}
 }
