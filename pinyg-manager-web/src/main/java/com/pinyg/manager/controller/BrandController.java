@@ -1,5 +1,7 @@
 package com.pinyg.manager.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.entity.Result;
 import com.pinyg.sellergoods.pojo.TbBrand;
@@ -86,7 +88,18 @@ public class BrandController {
 
 	@RequestMapping("/selectOptionList")
 	public List<Map> selectOptionList(){
+
+
 		return brandService.selectOptionList();
+	}
+
+	public static void main(String[] args) {
+		TbBrand tbBrand = new TbBrand();
+		tbBrand.setId(1L);
+		tbBrand.setName("12315");
+		String s = JSON.toJSONString(tbBrand);
+		Map map = JSON.parseObject(s, Map.class);
+		System.out.println(map.toString());
 	}
 
 }

@@ -1,5 +1,4 @@
 package com.pinyg.manager.controller;
-import java.util.List;
 
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.entity.Result;
@@ -9,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.alibaba.dubbo.config.annotation.Reference;
+
+import java.util.List;
 
 /**
  * controller
@@ -93,10 +93,22 @@ public class SellerController {
 	public Result delete(String [] ids){
 		try {
 			sellerService.delete(ids);
-			return new Result(true, "删除成功"); 
+			return new Result(true, "删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new Result(false, "删除失败");
+		}
+	}
+
+
+	@RequestMapping("/updateStatus")
+	public Result updateStatus(String sellerId,String status){
+		try {
+			sellerService.updateStatus(sellerId,status);
+			return new Result(true, "成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "失败");
 		}
 	}
 	

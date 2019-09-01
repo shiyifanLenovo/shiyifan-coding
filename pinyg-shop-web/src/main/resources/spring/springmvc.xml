@@ -11,8 +11,7 @@
 	<!-- 自动扫描且只扫描@Controller -->
 	<context:component-scan base-package="com.pinyg.shop.controller" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		<context:include-filter type="annotation"
-								expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
 
 	<mvc:default-servlet-handler/>
@@ -30,12 +29,4 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
-
-	<!-- 引用dubbo 服务 -->
-	<dubbo:application name="pinyougou-shop-web"  owner="pinyg" ></dubbo:application>
-	<dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" group="dubbo-pinyg"/>
-	<!-- 协议 -->
-	<dubbo:protocol name="dubbo" port="20881"/>
-	<import resource="classpath:META-INF/consumer/sellergoods-reference.xml"></import>
-
 </beans>
