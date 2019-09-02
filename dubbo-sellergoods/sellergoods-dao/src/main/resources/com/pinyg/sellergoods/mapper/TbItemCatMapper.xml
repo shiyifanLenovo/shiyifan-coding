@@ -193,4 +193,11 @@
       type_id = #{typeId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByParentId" parameterType="java.lang.Long" resultType="com.pinyg.sellergoods.pojo.TbItemCat" >
+
+    select * from tb_item_cat where parent_id=#{parentId}
+
+  </select>
+
 </mapper>
