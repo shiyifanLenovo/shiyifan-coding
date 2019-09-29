@@ -3,7 +3,6 @@ package com.pinyg.common.utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -148,8 +147,9 @@ public final class CookieUtil {
                 cookieValue = URLEncoder.encode(cookieValue, "utf-8");
             }
             Cookie cookie = new Cookie(cookieName, cookieValue);
-            if (cookieMaxage > 0)
-                cookie.setMaxAge(cookieMaxage);
+            if (cookieMaxage > 0){
+	            cookie.setMaxAge(cookieMaxage);
+            }
             if (null != request) {
                 //设置域名的cookie
             	String domainName = getDomainName(request);
@@ -178,8 +178,9 @@ public final class CookieUtil {
                 cookieValue = URLEncoder.encode(cookieValue, encodeString);
             }
             Cookie cookie = new Cookie(cookieName, cookieValue);
-            if (cookieMaxage > 0)
-                cookie.setMaxAge(cookieMaxage);
+            if (cookieMaxage > 0){
+	            cookie.setMaxAge(cookieMaxage);
+            }
             if (null != request) {
             	String domainName = getDomainName(request);
                 if (!LOCALHOST.equals(domainName)) {
