@@ -16,7 +16,13 @@
     <dubbo:protocol name="dubbo" port="20881" threadpool="cached" threads="200"/>
     <dubbo:annotation package="com.pinyg.sellergoods.service"></dubbo:annotation>
     <dubbo:service interface="com.pinyg.sellergoods.service.BrandService" ref="brandService"
-     owner="pinyg" group="dubbo-pinyg"/>
+                   owner="pinyg" group="dubbo-pinyg" filter="dubboHystrixFilter">
+
+        <dubbo:method name="findOne" retries="0">
+            <dubbo:parameter key="fallback" value="brandServiceFallBack"/>
+        </dubbo:method>
+
+    </dubbo:service>
 
     <dubbo:service interface="com.pinyg.sellergoods.service.GoodsService" ref="goodsService"
                    owner="pinyg" group="dubbo-pinyg"/>

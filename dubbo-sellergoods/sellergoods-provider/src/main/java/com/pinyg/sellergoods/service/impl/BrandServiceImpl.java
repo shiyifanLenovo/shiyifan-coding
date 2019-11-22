@@ -7,6 +7,8 @@ import com.pinyg.sellergoods.mapper.TbBrandMapper;
 import com.pinyg.sellergoods.pojo.TbBrand;
 import com.pinyg.sellergoods.pojo.TbBrandExample;
 import com.pinyg.sellergoods.service.BrandService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +17,15 @@ import java.util.Map;
 
 @Service("brandService")
 public class BrandServiceImpl implements BrandService {
+	private static final Logger LOGGER=LoggerFactory.getLogger(BrandServiceImpl.class);
 
 	@Autowired
 	private TbBrandMapper tbBrandMapper;
 
+
 	@Override
 	public List<TbBrand> findAll() {
-		return tbBrandMapper.selectByExample(null);
+		throw  new RuntimeException("Exception to show hystrix enabled.");
 	}
 
 
@@ -36,10 +40,11 @@ public class BrandServiceImpl implements BrandService {
 	public boolean add(TbBrand tbBrand) {
 		return tbBrandMapper.insertSelective(tbBrand)>0;
 	}
-
 	@Override
 	public TbBrand findOne(long id) {
-		return tbBrandMapper.selectByPrimaryKey(id);
+		LOGGER.info("findOne============================="+id);
+		throw  new RuntimeException("Exception to show hystrix enabled.");
+		//return tbBrandMapper.selectByPrimaryKey(id);
 	}
 
 	@Override

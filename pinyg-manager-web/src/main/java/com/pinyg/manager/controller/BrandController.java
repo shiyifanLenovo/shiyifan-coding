@@ -1,7 +1,6 @@
 package com.pinyg.manager.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.pinyg.sellergoods.entity.PageResult;
 import com.pinyg.sellergoods.entity.Result;
 import com.pinyg.sellergoods.pojo.TbBrand;
@@ -28,9 +27,15 @@ public class BrandController {
 	@Autowired(required = true)
 	private BrandService brandService;
 
+
 	@RequestMapping(value = "/findAll")
-	public List<TbBrand> findAll(){
+	public List<TbBrand> findAll(String name){
 		return brandService.findAll();
+	}
+
+	public String reliable(long id) {
+		LOGGER.error("发生了异常===============================");
+		return "hystrix fallback value-------";
 	}
 
 	@RequestMapping("/findPage")
@@ -50,10 +55,11 @@ public class BrandController {
 		return 	new Result(false,"新增失败");
 	}
 
-
 	@RequestMapping("/findOne")
 	public TbBrand findOne(long id){
-		return  brandService.findOne(id);
+		TbBrand one = brandService.findOne(id);
+		LOGGER.info("findOne response ==================="+one);
+		return one;
 	}
 
 	@RequestMapping("/update")
@@ -91,15 +97,6 @@ public class BrandController {
 
 
 		return brandService.selectOptionList();
-	}
-
-	public static void main(String[] args) {
-		TbBrand tbBrand = new TbBrand();
-		tbBrand.setId(1L);
-		tbBrand.setName("12315");
-		String s = JSON.toJSONString(tbBrand);
-		Map map = JSON.parseObject(s, Map.class);
-		System.out.println(map.toString());
 	}
 
 }
