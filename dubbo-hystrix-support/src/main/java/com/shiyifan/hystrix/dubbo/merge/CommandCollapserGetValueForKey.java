@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -103,17 +102,8 @@ public class CommandCollapserGetValueForKey extends HystrixCollapser<List<Hystri
 
 		@Override
 		protected List<HystrixCollapserResponse> run() {
-			//System.out.println("batchCommand run  "+requests.size());
 			LOGGER.info("batchCommand run  "+requests.size());
 			List<HystrixCollapserResponse> responses = batchCommandService.batchCommand(requests);
-			/*List<HystrixCollapserResponse> responses = new ArrayList<>();
-			requests.forEach((HystrixCollapser.CollapsedRequest<HystrixCollapserResponse, HystrixCollapserRequest> request)->{
-				HystrixCollapserRequest argument = request.getArgument();
-				String requestKey = argument.getRequestKey();
-				HystrixCollapserResponse<String> objectHystrixCollapserResponse = new HystrixCollapserResponse<>();
-				objectHystrixCollapserResponse.setResponseData("response "+requestKey);
-				responses.add(objectHystrixCollapserResponse);
-			});*/
 			return responses;
 		}
 	}
