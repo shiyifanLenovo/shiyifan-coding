@@ -7,6 +7,9 @@ import com.pinyg.sellergoods.mapper.TbBrandMapper;
 import com.pinyg.sellergoods.pojo.TbBrand;
 import com.pinyg.sellergoods.pojo.TbBrandExample;
 import com.pinyg.sellergoods.service.BrandService;
+import com.shiyifan.hystrix.dubbo.filter.HystrixCollapserRequest;
+import com.shiyifan.hystrix.dubbo.filter.HystrixCollapserResponse;
+import com.shiyifan.hystrix.dubbo.merge.MergeRequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,12 @@ public class BrandServiceImpl implements BrandService {
 
 	@Autowired
 	private TbBrandMapper tbBrandMapper;
+
+	@Autowired
+	private MergeRequestService mergeRequestService;
+
+	@Autowired
+	private ABatchCommandServiceImpl batchCommandService;
 
 
 	@Override
@@ -40,11 +49,27 @@ public class BrandServiceImpl implements BrandService {
 	public boolean add(TbBrand tbBrand) {
 		return tbBrandMapper.insertSelective(tbBrand)>0;
 	}
+
 	@Override
 	public TbBrand findOne(long id) {
-		LOGGER.info("findOne============================="+id);
-		throw  new RuntimeException("Exception to show hystrix enabled.");
-		//return tbBrandMapper.selectByPrimaryKey(id);
+		LOGGER.info("merge request thread  "+Thread.currentThread().getName()+"=="+id);
+
+		HystrixCollapserRequest hystrixCollapserRequest = new HystrixCollapserRequest(String.valueOf(id));
+		try {
+			HystrixCollapserResponse response = mergeRequestService.mergeRequest(batchCommandService,hystrixCollapserRequest);
+			LOGGER.info("merge request response result "+response.getResponseData());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tbBrandMapper.selectByPrimaryKey(id);
+	}
+
+
+
+	@Override
+	public HystrixCollapserResponse findHystrix(HystrixCollapserRequest request) {
+
+		return new HystrixCollapserResponse();
 	}
 
 	@Override

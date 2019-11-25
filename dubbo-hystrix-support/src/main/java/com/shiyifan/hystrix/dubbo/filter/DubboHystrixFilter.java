@@ -10,6 +10,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+/**
+ * @compang 联想懂的通信
+ * @Description: 服务降级拦截器
+ * @Author: shiyf
+ * @CreateDate: 2019/11/22 16:07
+ * @UpdateUser: shiyf
+ * @UpdateDate: 2019/11/22 16:07
+ * @UpdateRemark: 修改内容
+ * @Version: cmp2.0
+ */
 @Activate(group = Constants.PROVIDER)
 public class DubboHystrixFilter implements Filter {
 
@@ -27,6 +37,8 @@ public class DubboHystrixFilter implements Filter {
         if(StringUtils.isEmpty(fallback)){
         	return  invoker.invoke(invocation);
         }
+		Object[] arguments = invocation.getArguments();
+        LOGGER.info("method request param "+arguments);
 		HystrixCommand.Setter setter = SetterFactory.create(interfaceName, methodName, url);
 		DubboHystrixCommand dubboHystrixCommand = new DubboHystrixCommand(setter, invoker, invocation, fallback);
 		Result execute = dubboHystrixCommand.execute();

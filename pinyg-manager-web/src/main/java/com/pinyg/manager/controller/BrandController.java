@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RestController
 @RequestMapping(value = "/brand")
@@ -33,10 +35,6 @@ public class BrandController {
 		return brandService.findAll();
 	}
 
-	public String reliable(long id) {
-		LOGGER.error("发生了异常===============================");
-		return "hystrix fallback value-------";
-	}
 
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page,int rows){
@@ -57,9 +55,21 @@ public class BrandController {
 
 	@RequestMapping("/findOne")
 	public TbBrand findOne(long id){
-		TbBrand one = brandService.findOne(id);
-		LOGGER.info("findOne response ==================="+one);
-		return one;
+		ExecutorService executorService = Executors.newFixedThreadPool(5);
+		TbBrand tbBrand = new TbBrand();
+		for (long i=0;i<10;i++){
+			long finalI = i;
+			executorService.execute(()->{
+				brandService.findOne(finalI);
+			});
+		}
+		brandService.findOne(id);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return tbBrand;
 	}
 
 	@RequestMapping("/update")

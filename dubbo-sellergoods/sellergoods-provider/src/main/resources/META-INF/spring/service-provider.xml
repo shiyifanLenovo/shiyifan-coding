@@ -18,9 +18,10 @@
     <dubbo:service interface="com.pinyg.sellergoods.service.BrandService" ref="brandService"
                    owner="pinyg" group="dubbo-pinyg" filter="dubboHystrixFilter">
 
-        <dubbo:method name="findOne" retries="0">
-            <dubbo:parameter key="fallback" value="brandServiceFallBack"/>
-        </dubbo:method>
+       <!-- <dubbo:method name="findHystrix" retries="0">
+           &lt;!&ndash; <dubbo:parameter key="fallback" value="brandServiceFallBack"/>&ndash;&gt;
+            <dubbo:parameter key="merge" value="merge"/>
+        </dubbo:method>-->
 
     </dubbo:service>
 
@@ -35,4 +36,7 @@
 
     <dubbo:service interface="com.pinyg.sellergoods.service.TypeTemplateService" ref="typeTemplateService"
                    owner="pinyg" group="dubbo-pinyg"/>
+
+
+    <bean id="mergeRequestService" class="com.shiyifan.hystrix.dubbo.merge.MergeRequestService" ></bean>
 </beans>
