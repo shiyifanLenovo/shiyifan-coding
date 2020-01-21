@@ -21,9 +21,9 @@ public class ABatchCommandServiceImpl implements BatchCommandService {
 		requests.forEach((HystrixCollapser.CollapsedRequest<HystrixCollapserResponse, HystrixCollapserRequest> request)->{
 			HystrixCollapserRequest argument = request.getArgument();
 			String requestKey = argument.getRequestKey();
-			HystrixCollapserResponse<String> objectHystrixCollapserResponse = new HystrixCollapserResponse<>();
-			objectHystrixCollapserResponse.setResponseData("response "+requestKey);
-			responses.add(objectHystrixCollapserResponse);
+			HystrixCollapserResponse<String> response = new HystrixCollapserResponse<>();
+			response.setResponseData("response "+requestKey);
+			responses.add(response);
 		});
 		return responses;
 	}

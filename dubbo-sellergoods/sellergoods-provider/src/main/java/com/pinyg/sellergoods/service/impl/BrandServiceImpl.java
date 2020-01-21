@@ -52,6 +52,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public TbBrand findOne(long id) {
+		int i = 1 / 0;
 		LOGGER.info("merge request thread  "+Thread.currentThread().getName()+"=="+id);
 
 		HystrixCollapserRequest hystrixCollapserRequest = new HystrixCollapserRequest(String.valueOf(id));
