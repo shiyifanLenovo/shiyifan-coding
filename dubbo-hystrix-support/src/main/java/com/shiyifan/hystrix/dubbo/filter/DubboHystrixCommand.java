@@ -39,7 +39,9 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
 	protected Result run() throws Exception {
 		Result result = invoker.invoke(invocation);
 		if(result.hasException()){
-			throw  new HystrixRuntimeException(HystrixRuntimeException.FailureType.COMMAND_EXCEPTION,DubboHystrixCommand.class,result.toString(),result.getException(),result.getException() );
+			//针对异常做处理
+			throw new  NullPointerException("空指针异常");
+			//throw  new HystrixRuntimeException(HystrixRuntimeException.FailureType.COMMAND_EXCEPTION,DubboHystrixCommand.class,result.toString(),result.getException(),result.getException() );
 		}
 		return result;
 	}
@@ -55,6 +57,9 @@ public class DubboHystrixCommand extends HystrixCommand<Result> {
         }
 		ExtensionLoader<FallBack> extensionLoader = ExtensionLoader.getExtensionLoader(FallBack.class);
 		FallBack fallBack = extensionLoader.getExtension(fallback);
+		String methodName = invocation.getMethodName();
+		Class<?> anInterface = invoker.getInterface();
+		LOGGER.info("%s,%s"+anInterface,methodName);
 		Object invoke = fallBack.invoke();
 		return new RpcResult(invoke);
 	}

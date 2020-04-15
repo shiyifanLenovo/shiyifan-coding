@@ -20,7 +20,7 @@ import org.springframework.util.StringUtils;
  * @UpdateRemark: 修改内容
  * @Version: cmp2.0
  */
-@Activate(group = Constants.PROVIDER)
+@Activate(group ={ Constants.PROVIDER,Constants.CONSUMER})
 public class DubboHystrixFilter implements Filter {
 
 	private static final Logger LOGGER=LoggerFactory.getLogger(DubboHystrixFilter.class);
