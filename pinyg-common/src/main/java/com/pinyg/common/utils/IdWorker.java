@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 /**
  *  0 10010110000010100100011010000001111000001(时间戳)   10100 （机房ID） 11001（机器ID）  010001000000(某一个机房内一个机器ID每毫秒同时生成的ID序列号)
  *
+ *  存在始终倒退问题，Jvm单机，重启问题
  */
 public class IdWorker {
 
