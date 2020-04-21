@@ -1,7 +1,10 @@
 package com.shiyifan.controller;
 
+import com.pinyg.common.utils.RedisUtils;
 import com.shiyifan.entity.DubboInterfaceInfo;
 import com.shiyifan.service.DubboInterfaceInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -13,6 +16,11 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/dubboInterfaceInfo")
 public class DubboInterfaceInfoController {
+
+
+	@Autowired
+	private RedisUtils redisUtils;
+
     /**
      * 服务对象
      */
@@ -27,7 +35,10 @@ public class DubboInterfaceInfoController {
      */
     @GetMapping("/selectOne")
     public DubboInterfaceInfo selectOne(Integer id) {
-        return this.dubboInterfaceInfoService.queryById(id);
+    	//redisUtils.set("test1",0);
+	    boolean acquire = redisUtils.acquire("test-lua", 1, 30L);
+	    System.out.println(acquire);
+	    return this.dubboInterfaceInfoService.queryById(id);
     }
 
 }

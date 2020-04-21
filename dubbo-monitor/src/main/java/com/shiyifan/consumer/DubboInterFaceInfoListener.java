@@ -70,7 +70,6 @@ public class DubboInterFaceInfoListener implements MessageListenerConcurrently {
 		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
 		//consumer 主动发送消息到broker中拉去
 		DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer(CONSUMER_GROUP);
-
 		//defaultMQPushConsumer.fetchSubscribeMessageQueues()
 		String nameServer = environment.getProperty("rocketmq.nameServer");
 		Assert.notNull(nameServer,"rocketmq.nameServer is null");

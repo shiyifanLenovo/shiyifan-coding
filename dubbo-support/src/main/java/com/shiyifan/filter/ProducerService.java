@@ -1,10 +1,13 @@
 package com.shiyifan.filter;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -37,7 +40,7 @@ public class ProducerService {
 			producer.setInstanceName(String.valueOf(System.currentTimeMillis()));
 			//TODO 设置异步发送重试几次
 			producer.setRetryTimesWhenSendAsyncFailed(0);
-			//TODO 自动规避故障得broker一段时间 假设broker master A 发送小心延迟到了500ms，就回在一段时间内屏蔽broker master A
+			//TODO 自动规避故障得broker一段时间 假设broker master A 发送消息延迟到了500ms，就回在一段时间内屏蔽broker master A
 			//TODO 会选择其他得broker master 发送。
 			producer.setSendLatencyFaultEnable(true);
 			producer.start();
@@ -51,7 +54,6 @@ public class ProducerService {
 		try {
 			LOGGER.info("dubbo interface  info "+msgContent.toString());
 			Message message = new Message(DUBBO_INTERFACES_TOPIC,null,null,JSON.toJSONString(msgContent).getBytes());
-			message.setDelayTimeLevel(3);
 			producer.send(message);
 
 			//producer 发送消息以后，可以走其他代码了，不需要阻塞在这里，当Mq返回结果时，producer 回回调callback函数，成功回调
@@ -74,6 +76,25 @@ public class ProducerService {
 			LOGGER.error("send message exception "+e);
 		}
 
+	}
+
+	/**
+	 * 发送延迟消息
+	 */
+	public void sendDelayMessage(RequestMessagePo<String> data) throws Exception {
+		Message message = new Message(data.getTopicName(), data.getMessageTag(), data.getMessageKey(), JSON.toJSONBytes(data));
+		//延迟登记 1s 5s 10s ..........2H
+		message.setDelayTimeLevel(5);
+		SendResult send = producer.send(message);
+		System.out.println("发送延迟消息结果=="+send.getSendStatus());
+	}
+
+	public static void main(String[] args) throws Exception {
+		ProducerService producerService = new ProducerService();
+		RequestMessagePo<String> stringRequestMessagePo = new RequestMessagePo<>();
+		stringRequestMessagePo.setTopicName("OrderPaySuccessTopic");
+		stringRequestMessagePo.setData("测试延迟消息");
+		producerService.sendDelayMessage(stringRequestMessagePo);
 	}
 
 

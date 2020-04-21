@@ -1,7 +1,10 @@
 package com.pinyg.common.utils;
 
 import org.apache.commons.lang3.RandomUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -11,12 +14,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ *  0 10010110000010100100011010000001111000001(时间戳)   10100 （机房ID） 11001（机器ID）  010001000000(某一个机房内一个机器ID每毫秒同时生成的ID序列号)
+ *
  */
 public class IdWorker {
+
+
+    private static final Logger logger=LoggerFactory.getLogger(IdWorker.class);
+
     /**
      * 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
      */
-    private final static long twepoch = 1288834974657L;
+    private final static long twepoch = 1587452805745L;
     /**
      * 机器标识位数
      */
@@ -30,13 +39,13 @@ public class IdWorker {
      */
     private final static long datacenterIdBits = 5L;
     /**
-     * 机器ID最大值
+     * 机器ID最大值 31
      */
     private final static long maxWorkerId = -1L ^ (-1L << workerIdBits);
     /**
      * 数据中心ID最大值 支持的最大数据标识id，结果是31
      */
-    private final static long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+    private final static long maxDataCenterId = -1L ^ (-1L << datacenterIdBits);
     /**
      * 毫秒内自增位
      */
@@ -64,37 +73,44 @@ public class IdWorker {
      */
     private long sequence = 0L;
 
-    private final long workerId;
+    private  long workerId;
 
 
-    public static class IDWorkInstance{
+    private static class IDWorkInstance{
         private static final IdWorker idWorker=new IdWorker();
     }
 
-    public static long getId(){
-        return  IDWorkInstance.idWorker.nextId();
+    public static IdWorker getInstance(){
+        return IDWorkInstance.idWorker;
+    }
+
+
+    public  long getId(){
+        return  this.nextId();
     }
 
 
     private IdWorker(){
-        this.dataCenterId = getDatacenterId(maxDatacenterId);
-        this.workerId = getMaxWorkerId(dataCenterId, maxWorkerId);
+        //获取数据中心ID
+        this.dataCenterId = getDatacenterId();
+        //根据数据中心获取机器ID
+        this.workerId =getMaxWorkerId(dataCenterId) ;
     }
     /**
      * @param workerId
      *            工作机器ID
-     * @param datacenterId
+     * @param dataCenterId
      *            序列号
      */
-    public IdWorker(long workerId, long datacenterId) {
+    private IdWorker(long dataCenterId,long workerId ) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }
-        if (datacenterId > maxDatacenterId || datacenterId < 0) {
-            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
+        if (dataCenterId > maxDataCenterId || dataCenterId < 0) {
+            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %d or less than 0", maxDataCenterId));
         }
         this.workerId = workerId;
-        this.dataCenterId = datacenterId;
+        this.dataCenterId = dataCenterId;
     }
     /**
      * 获取下一个ID
@@ -142,20 +158,25 @@ public class IdWorker {
     /**
      * 获取 最大的机器ID maxWorkerId
      */
-    protected static long getMaxWorkerId(long datacenterId, long maxWorkerId) {
-        StringBuffer mpid = new StringBuffer();
-        mpid.append(datacenterId);
+    protected static long getMaxWorkerId(long dataCenterId) {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(dataCenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (!name.isEmpty()) {
          /*
           * GET jvmPid
           */
-            mpid.append(name.split("@")[0]);
+         stringBuffer.append(name.split("@")[0]);
         }
       /*
        * MAC + PID 的 hashcode 获取16个低位
        */
-        return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
+        long workerId = (stringBuffer.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
+        if (workerId > maxWorkerId || workerId < 0) {
+            throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
+        }
+        logger.info("according to the workId obtained from the data center is "+workerId);
+        return workerId;
     }
 
     /**
@@ -163,36 +184,48 @@ public class IdWorker {
      * 数据标识id部分
      * </p>
      */
-    protected static long getDatacenterId(long maxDatacenterId) {
-        long id = 0L;
+    protected static long getDatacenterId() {
+        long dataCenterId = 0L;
         try {
             InetAddress ip = InetAddress.getLocalHost();
             NetworkInterface network = NetworkInterface.getByInetAddress(ip);
             if (network == null) {
-                id = 1L;
+                dataCenterId = 1L;
             } else {
                 byte[] mac = network.getHardwareAddress();
-                id = ((0x000000FF & (long) mac[mac.length - 1])
+                dataCenterId = ((0x000000FF & (long) mac[mac.length - 1])
                         | (0x0000FF00 & (((long) mac[mac.length - 2]) << 8))) >> 6;
-                id = id % (maxDatacenterId + 1);
+                dataCenterId = dataCenterId % (maxDataCenterId + 1);
             }
         } catch (Exception e) {
              return    RandomUtils.nextLong(0,31);
         }
-        return id;
+        if (dataCenterId > maxDataCenterId || dataCenterId < 0) {
+            throw new IllegalArgumentException(String.format("data center Id can't be greater than %d or less than 0", maxDataCenterId));
+        }
+        logger.info("data center id is "+dataCenterId);
+        return dataCenterId;
     }
 
-    static final CountDownLatch count=new CountDownLatch(10000);
+    static final CountDownLatch count=new CountDownLatch(10);
     
     public static void main(String[] args) throws InterruptedException {
+
+        //System.out.println(System.currentTimeMillis());
+
+        IdWorker idWorker = IdWorker.getInstance();
+
+
+
 
         long starEndTime = System.currentTimeMillis();
 	    ExecutorService executorService = Executors.newFixedThreadPool(10);
 
+	    //new File(File)
 
-        for (int i=0;i<10000;i++){
+        for (int i=0;i<10;i++){
 	        executorService.execute(()->{
-		        long id = IdWorker.getId();
+		        long id = idWorker.getId();
 		        System.out.println(id);
 		        count.countDown();
 	        });

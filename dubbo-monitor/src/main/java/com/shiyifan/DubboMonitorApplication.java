@@ -4,6 +4,7 @@ import com.shiyifan.annotation.EnableRocketMqConsumer;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 
 /**
@@ -18,6 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableRocketMqConsumer
 @MapperScan("com.lenovoconnect.dao")
+@EnableCaching
 public class DubboMonitorApplication {
 
 	public static void main(String[] args) {
